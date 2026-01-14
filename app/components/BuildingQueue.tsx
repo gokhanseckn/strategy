@@ -37,7 +37,7 @@ export default function BuildingQueue() {
                             <div className="w-8 h-8 relative">
                                 {/* Small icon if available, or just generic hammer */}
                                 <Image
-                                    src="/assets/barrack_construction.png"
+                                    src={BUILDINGS.find(b => b.name === slot.buildingName)?.constructionImage || "/assets/barrack_construction.png"}
                                     alt="Constructing"
                                     fill
                                     className="object-contain"

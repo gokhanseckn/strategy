@@ -61,8 +61,8 @@ export default function VillageMap() {
           const remainingSeconds = isConstructing ? Math.ceil((slot.constructionEndTime! - now) / 1000) : 0;
 
           // Image to show: Construction placeholder if building, otherwise actual building
-          // NOTE: User requested "barrack_construction.png" for ALL buildings during construction
-          const displayImage = isConstructing ? '/assets/barrack_construction.png' : (building?.image);
+          // NOTE: User requested specific construction images for each building
+          const displayImage = isConstructing ? (building?.constructionImage || '/assets/barrack_construction.png') : (building?.image);
 
           // Border color: Yellow/Brown if constructing, Green if finished
           const borderColor = isConstructing ? 'border-[#d97706]' : 'border-[#4ade80]'; // amber-600 vs green-400
@@ -89,11 +89,9 @@ export default function VillageMap() {
                 {/* Empty Slot Graphic - True Isometric Ellipse */}
                 {!building && (
                   <div
-                    className="w-full h-full bg-[#a9ab48]/40 hover:bg-[#a9ab48]/60 shadow-[inset_0_0_0_2px_#4ade80,inset_0_0_10px_rgba(74,222,128,0.5)] hover:shadow-[inset_0_0_0_3px_#4ade80,inset_0_0_20px_#4ade80] flex items-center justify-center transition-all duration-300 backdrop-blur-[1px]"
+                    className="w-full h-full bg-[#a9ab48]/20 hover:bg-[#a9ab48]/40 shadow-[inset_0_0_0_2px_rgba(74,222,128,0.3),inset_0_0_10px_rgba(74,222,128,0.2)] hover:shadow-[inset_0_0_0_3px_rgba(74,222,128,0.5),inset_0_0_20px_rgba(74,222,128,0.4)] flex items-center justify-center transition-all duration-300 backdrop-blur-[1px]"
                     style={{ borderRadius: '50%' }}
-                  >
-                    <span className="text-white text-2xl font-bold -mt-1 drop-shadow-md">+</span>
-                  </div>
+                  />
                 )}
                 {/* For occupied buildings, button is transparent but provides the circular click footprint */}
               </button>
